@@ -33,7 +33,7 @@ app.use(bodyParser.urlencoded({extended: true}));
 app.use('/public', express.static(process.cwd() + '/public'));
 
 app.get('/', function(req, res){
-  res.sendFile(process.cwd() + '/views/index.html');
+  res.sendFile(process.cwd() + '/index.html');
 });
   
 // your first API endpoint... 
@@ -61,10 +61,7 @@ function dnsCallback(err, address, family) {
 
 const urlValid = url =>{
   const parsedUrl = url_.parse(url);
-  //console.log(parsedUrl)
   const hostNameUrl = dns.lookup(parsedUrl.hostname, dnsCallback);
-  //console.log("TEST 1:",hostNameUrl)
-  //console.log("TEST 2:",hostNameUrl.callback)
   return hostNameUrl!=null
 }
 
@@ -99,9 +96,8 @@ app.post("/api/shorturl/new",(req,res)=>{
       done(null, data);
     }
   })//close model callback 
-  }//close handler
-) //close method
-
+  }//close handler) 
+  
 
 app.get("/api/shorturl/:shorturl",(req,res)=>{
   if (req.params.shorturl=="new"){
